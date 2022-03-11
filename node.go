@@ -4,6 +4,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"io"
 	"strings"
 
 	"github.com/u2takey/go-utils/sets"
@@ -17,12 +18,18 @@ type Stream struct {
 	Context  context.Context
 }
 
+func NewRunHook(f func(), done <-chan struct{}, closer io.Closer) *RunHook {
+	return &RunHook{
+		f:      f,
+		done:   done,
+		closer: closer,
+	}
+}
+
 type RunHook struct {
 	f      func()
 	done   <-chan struct{}
-	closer interface {
-		Close() error
-	}
+	closer io.Closer
 }
 
 func NewStream(node *Node, streamType string, label Label, selector Selector) *Stream {
