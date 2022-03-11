@@ -13,7 +13,7 @@ import (
 	"strings"
 	"time"
 
-	ffmpeg "github.com/u2takey/ffmpeg-go"
+	ffmpeg "github.com/hsinhoyeh/ffmpeg-go"
 )
 
 // ExampleShowProgress is an example of using the ffmpeg `-progress` option with a
